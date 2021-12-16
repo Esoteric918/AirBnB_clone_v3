@@ -5,7 +5,7 @@ from models import storage
 from api.v1.views import app_views
 from os import getenv
 # Start Flask app
-app = Flask()
+app = Flask(__name__)
 
 
 @app.teardown_appcontext
