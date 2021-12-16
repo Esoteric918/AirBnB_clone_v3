@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """sets up Flask app"""
-from flask import Flask
+from flask import Flask, jsonify
 from models import storage
 from api.v1.views import app_views
 from os import getenv
@@ -13,6 +13,11 @@ app.register_blueprint(app_views)
 def teardown(context):
     """reloads storage after each request"""
     storage.close()
+
+@app.errorhandler(404)
+def page_not_found(error):
+    """404 response"""
+    return jsonify(error="Not found")
 
 
 if __name__ == "__main__":
