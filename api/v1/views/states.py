@@ -1,13 +1,14 @@
 #!/usr/bin/python3
-
-from flask import Flask, jsonify
+"""states routes"""
+from api.v1.views import app_views
 from models import storage
 from models.state import State
-from api.v1.views import app_views
+import json
 
-@app_views.route('/api/v1/states', methods=['GET'])
+
+@app_views.route('/states', methods=['GET'], strict_slashes=False)
 def getStates():
     res = []
-    for state in storage.all(State).values():
+    for state in storage.all("State").values():
         res.append(state.to_dict())
-    return jsonify(res)
+    return json.dumps(res)
