@@ -10,7 +10,7 @@ def status():
     return jsonify(status="OK")
 
 @app_views.route('/api/v1/stats', strict_slashes=False)
-def stats():
+def get_stats():
     return jsonify(amenities=storage.count("Amenity"),
                    cities=storage.count("City"),
                    places=storage.count("Place"),
