@@ -77,6 +77,8 @@ class DBStorage:
 
     def get(self, cls, id):
         """returns a specific object from storage"""
+        if type(cls) != str:
+            cls = cls.__name__
         return self.all(cls).get("{}.{}".format(cls, id))
 
     def count(self, cls=None):
