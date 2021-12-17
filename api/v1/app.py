@@ -8,13 +8,14 @@ from flask_cors import CORS
 # Start Flask app
 app = Flask(__name__)
 app.register_blueprint(app_views)
-cors = CORS(app, resources={r"/*": {"origins":"0.0.0.0"}})
+cors = CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
 
 
 @app.teardown_appcontext
 def teardown(context):
     """reloads storage after each request"""
     storage.close()
+
 
 @app.errorhandler(404)
 def page_not_found(error):

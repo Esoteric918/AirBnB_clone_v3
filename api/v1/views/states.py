@@ -13,7 +13,7 @@ def getStates():
         for state in storage.all("State").values():
             res.append(state.to_dict())
         return jsonify(res)
-    elif request.method =='POST':
+    elif request.method == 'POST':
         state_dict = request.get_json()
         if not state_dict:
             abort(400, "Not a JSON")
@@ -23,6 +23,7 @@ def getStates():
         storage.new(state)
         storage.save()
         return jsonify(state.to_dict()), 201
+
 
 @app_views.route('/states/<state_id>', methods=['GET', 'DELETE', 'PUT'],
                  strict_slashes=False)

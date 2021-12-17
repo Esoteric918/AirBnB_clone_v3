@@ -71,4 +71,3 @@ def places_with_id(place_id=None):
                 setattr(place_obj, key, req_json[key])
         place_obj.save()
         return jsonify(place_obj.to_dict()), 200
-

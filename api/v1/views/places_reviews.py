@@ -31,6 +31,7 @@ def getReview(review_id):
     else:
         return jsonify(revP.to_dict())
 
+
 @app_views.route('reviews/<review_id>', methods=['DELETE'],
                  strict_slashes=False)
 def deleteReview(review_id):
@@ -42,6 +43,7 @@ def deleteReview(review_id):
         storage.delete(rev_dict)
         storage.save()
         return jsonify({}), 200
+
 
 @app_views.route('places/<place_id>/reviews', methods=['POST'],
                  strict_slashes=False)

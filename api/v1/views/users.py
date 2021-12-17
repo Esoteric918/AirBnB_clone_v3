@@ -14,7 +14,7 @@ def all_users():
         for user in storage.all(User).values():
             res.append(user.to_dict())
         return jsonify(res)
-    elif request.method =='POST':
+    elif request.method == 'POST':
         user_dict = request.get_json()
         if not user_dict:
             abort(400, "Not a JSON")
