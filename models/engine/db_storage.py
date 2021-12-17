@@ -85,4 +85,3 @@ class DBStorage:
         """counts number of obj in a class from storage
         if no class specified coundts all objects in storage"""
         return len(self.all(cls))
-
