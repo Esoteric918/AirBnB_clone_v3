@@ -59,8 +59,8 @@ class TestAPIAemnities(unittest.TestCase):
         am = User(name="Test", email="test@test.test", password="test")
         am.save()
         user_args = {"name": "Change", "id": "Don't change",
-                      "created_at": "Don't Change",
-                      "email": "test@test.test", "password": "test"}
+                     "created_at": "Don't Change",
+                     "email": "test@test.test", "password": "test"}
         am_id = am.id
         am_created_at = am.created_at
         response = self.app.put(

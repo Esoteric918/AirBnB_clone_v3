@@ -17,7 +17,7 @@ class TestAPIAemnities(unittest.TestCase):
     def setUpClass(self):
         app.config['TESTING'] = True
         self.app = app.test_client()
-        st= State(name="Test")
+        st = State(name="Test")
         st.save()
         self.ct = City(name="Test", state_id=st.id)
         self.ct.save()
@@ -68,7 +68,7 @@ class TestAPIAemnities(unittest.TestCase):
         pl = Place(name="Test", city_id=self.ct.id, user_id=self.user.id)
         pl.save()
         place_args = {"name": "Change", "id": "Don't change",
-                        "created_at": "Don't Change"}
+                      "created_at": "Don't Change"}
         pl_id = pl.id
         am_created_at = pl.created_at
         response = self.app.put(

@@ -75,7 +75,7 @@ class TestAPIAemnities(unittest.TestCase):
                     text="Review text")
         rv.save()
         review_args = {"name": "Change", "id": "Don't change",
-                        "created_at": "Don't Change"}
+                       "created_at": "Don't Change"}
         pl_id = rv.id
         am_created_at = rv.created_at
         response = self.app.put(

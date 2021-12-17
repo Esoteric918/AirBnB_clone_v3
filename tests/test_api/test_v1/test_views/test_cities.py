@@ -62,7 +62,7 @@ class TestAPIAemnities(unittest.TestCase):
         am = City(name="Test", state_id=self.st.id)
         am.save()
         city_args = {"name": "Change", "id": "Don't change",
-                        "created_at": "Don't Change"}
+                     "created_at": "Don't Change"}
         am_id = am.id
         am_created_at = am.created_at
         response = self.app.put(
