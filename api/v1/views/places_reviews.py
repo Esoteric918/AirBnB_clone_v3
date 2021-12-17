@@ -81,7 +81,7 @@ def updateReview(review_id):
     if res is None:
         abort(400, "Not a JSON")
     else:
-        for key in res.item():
+        for key in res:
             if key not in ['id',
                            'created_at',
                            'updated_at',

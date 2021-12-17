@@ -20,13 +20,17 @@ def all_users():
             abort(400, "Not a JSON")
         if 'name' not in user_dict.keys():
             abort(400, "Missing name")
+        if 'email' not in user_dict.keys():
+            abort(400, "Missing email")
+        if 'password' not in user_dict.keys():
+            abort(400, "Missing email")
         user = User(**user_dict)
         storage.new(user)
         storage.save()
         return jsonify(user.to_dict()), 201
 
 
-@app_views.route('/users/<user_id>', methods=['GET', 'DELETE'],
+@app_views.route('/users/<user_id>', methods=['GET', 'DELETE', 'PUT'],
                  strict_slashes=False)
 def single_user(user_id):
     user = storage.get(User, user_id)

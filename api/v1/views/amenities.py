@@ -26,7 +26,7 @@ def all_amenities():
         return jsonify(amenity.to_dict()), 201
 
 
-@app_views.route('/amenities/<amenity_id>', methods=['GET', 'DELETE'],
+@app_views.route('/amenities/<amenity_id>', methods=['GET', 'DELETE', 'PUT'],
                  strict_slashes=False)
 def single_amenity(amenity_id):
     amenity = storage.get(Amenity, amenity_id)
