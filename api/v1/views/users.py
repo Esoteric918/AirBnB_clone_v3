@@ -11,7 +11,7 @@ from flask import jsonify, request, abort
 def all_users():
     if request.method == 'GET':
         res = []
-        for user in storage.all(User):
+        for user in storage.all(User).values():
             res.append(user.to_dict())
         return jsonify(res)
     elif request.method =='POST':

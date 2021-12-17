@@ -11,7 +11,7 @@ from flask import jsonify, request, abort
 def all_amenities():
     if request.method == 'GET':
         res = []
-        for amenity in storage.all(Amenity):
+        for amenity in storage.all(Amenity).values():
             res.append(amenity.to_dict())
         return jsonify(res)
     elif request.method =='POST':

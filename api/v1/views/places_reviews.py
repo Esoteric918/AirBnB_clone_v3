@@ -12,12 +12,13 @@ from models.place import Place
                  methods=['GET'], strict_slashes=False)
 def placeReview(place_id):
     """ gets all the places"""
-    if place_id is None:
+    place = storage.get(Place, place_id)
+    if place is None:
         abort(404)
 
     res = []
-    for place in storage.all("Place").values():
-        res.append(place.to_dict())
+    for review in place.reviews:
+        res.append(review.to_dict())
     return jsonify(res)
 
 
@@ -44,7 +45,7 @@ def deleteReview(review_id):
 
 @app_views.route('places/<place_id>/reviews', methods=['POST'],
                  strict_slashes=False)
-def makePlace(place_id):
+def makeReview(place_id):
     place = storage.get(Place, place_id)
     rev_dict = request.get_json()
     if not place:
@@ -53,15 +54,23 @@ def makePlace(place_id):
         abort(400, "Not a JSON")
     elif "name" not in rev_dict.keys():
         abort(400, "Missing name")
+    if "text" not in rev_dict.keys():
+        abort(400, "Missing text")
+    user_id = rev_dict.get("user_id")
+    if user_id is None:
+        abort(400, "Missing user_id")
+    elif storage.get('User', user_id) is None:
+        abort(404)
     else:
-        city = Place(**rev_dict)
-        storage.new(rev_dict)
+        review = Review(**rev_dict)
+        review.place_id = place.id
+        storage.new(review)
         storage.save()
         return jsonify(place.to_dict()), 201
 
 
 @app_views.route('reviews/<review_id>', methods=['PUT'], strict_slashes=False)
-def updatePlaces(review_id):
+def updateReview(review_id):
     """update a place"""
     obj = storage.get(Review, review_id)
     if obj is None:
@@ -70,15 +79,13 @@ def updatePlaces(review_id):
     if res is None:
         abort(400, "Not a JSON")
     else:
-        for k, v in res.item():
-            if k in ['id',
-                     'created_at',
-                     'updated_at',
-                     'user_id',
-                     'place_id']:
-                    pass
-            else:
-                setattr(obj, k, v)
-        storage.save()
+        for key in res.item():
+            if key not in ['id',
+                           'created_at',
+                           'updated_at',
+                           'user_id',
+                           'place_id']:
+                setattr(obj, key, res[key])
+        obj.save()
         newOb = obj.to_dict()
         return jsonify(newOb), 200
