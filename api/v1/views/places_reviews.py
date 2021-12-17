@@ -2,7 +2,6 @@
 '''City Routes'''
 from api.v1.views import app_views
 from models import storage
-from models import review
 from models.review import Review
 from flask import jsonify, request, abort
 from models.place import Place
