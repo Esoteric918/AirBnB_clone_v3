@@ -1,6 +1,7 @@
 #!/usr/bin/python
 """ holds class Place"""
 import models
+from models import amenity
 from models.base_model import BaseModel, Base
 from os import getenv
 import sqlalchemy
@@ -53,6 +54,7 @@ class Place(BaseModel, Base):
     def __init__(self, *args, **kwargs):
         """initializes Place"""
         super().__init__(*args, **kwargs)
+        self.amenity_ids = []
 
     if models.storage_t != 'db':
         @property
@@ -73,6 +75,6 @@ class Place(BaseModel, Base):
             amenity_list = []
             all_amenities = models.storage.all(Amenity)
             for amenity in all_amenities.values():
-                if amenity.place_id == self.id:
+                if amenity.id in self.amenity_ids:
                     amenity_list.append(amenity)
             return amenity_list

@@ -24,6 +24,7 @@ def getStates():
         storage.save()
         return jsonify(state.to_dict()), 201
 
+
 @app_views.route('/states/<state_id>', methods=['GET', 'DELETE', 'PUT'],
                  strict_slashes=False)
 def state_by_id(state_id):

@@ -8,7 +8,11 @@ from flask_cors import CORS
 # Start Flask app
 app = Flask(__name__)
 app.register_blueprint(app_views)
+<<<<<<< HEAD
 cors = CORS(app, resources={r"/*" : {"origins":"0.0.0.0"}})
+=======
+cors = CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
+>>>>>>> 7d545494c15f4fa8728db084ad99736d9391e091
 
 
 @app.teardown_appcontext
@@ -20,14 +24,16 @@ def teardown(context):
 @app.errorhandler(404)
 def page_not_found(error):
     """404 response"""
-    return jsonify(error="Not found")
+    return jsonify(error="Not found"), 404
 
 
 if __name__ == "__main__":
-    # run the app host
-    # defaults:
-    #   host 0.0.0.0
-    #   port 5000
+    """
+    run the app host
+        defaults:
+            host='0.0.0.0'
+            port='5000'
+    """
     host = getenv("HBNB_API_HOST", '0.0.0.0')
     port = getenv("HBNB_API_PORT", '5000')
     app.run(host=host, port=port, threaded=True)

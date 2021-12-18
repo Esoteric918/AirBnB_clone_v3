@@ -54,8 +54,8 @@ def places_with_id(place_id=None):
         return jsonify(place_obj.to_dict())
 
     if request.method == 'DELETE':
-        place_obj.delete()
-        del place_obj
+        storage.delete(place_obj)
+        storage.save()
         return jsonify({}), 200
 
     if request.method == 'PUT':
@@ -66,7 +66,7 @@ def places_with_id(place_id=None):
             if key not in ['id',
                            'user_id',
                            'city-id',
-                           'created-at',
+                           'created_at',
                            'updated_at']:
                 setattr(place_obj, key, req_json[key])
         place_obj.save()

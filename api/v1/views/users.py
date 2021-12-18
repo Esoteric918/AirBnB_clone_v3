@@ -9,6 +9,7 @@ from flask import jsonify, request, abort
 @app_views.route('/users', methods=['GET', 'POST'],
                  strict_slashes=False)
 def all_users():
+    """handles /users routes"""
     if request.method == 'GET':
         res = []
         for user in storage.all(User).values():
@@ -20,15 +21,20 @@ def all_users():
             abort(400, "Not a JSON")
         if 'name' not in user_dict.keys():
             abort(400, "Missing name")
+        if 'email' not in user_dict.keys():
+            abort(400, "Missing email")
+        if 'password' not in user_dict.keys():
+            abort(400, "Missing password")
         user = User(**user_dict)
         storage.new(user)
         storage.save()
         return jsonify(user.to_dict()), 201
 
 
-@app_views.route('/users/<user_id>', methods=['GET', 'DELETE'],
+@app_views.route('/users/<user_id>', methods=['GET', 'DELETE', 'PUT'],
                  strict_slashes=False)
 def single_user(user_id):
+    """handles routes for specific user obj"""
     user = storage.get(User, user_id)
     if not user:
         abort(404)
@@ -43,7 +49,7 @@ def single_user(user_id):
         if not update_dict:
             abort(400, "Not a JSON")
         for key in update_dict:
-            if key not in ['created_at', 'id', 'updated_at']:
+            if key not in ['created_at', 'id', 'updated_at', 'email']:
                 setattr(user, key, update_dict[key])
         user.save()
         return jsonify(user.to_dict()), 200

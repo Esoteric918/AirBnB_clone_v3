@@ -2,7 +2,6 @@
 '''City Routes'''
 from api.v1.views import app_views
 from models import storage
-from models import review
 from models.review import Review
 from flask import jsonify, request, abort
 from models.place import Place
@@ -31,6 +30,7 @@ def getReview(review_id):
     else:
         return jsonify(revP.to_dict())
 
+
 @app_views.route('reviews/<review_id>', methods=['DELETE'],
                  strict_slashes=False)
 def deleteReview(review_id):
@@ -42,6 +42,7 @@ def deleteReview(review_id):
         storage.delete(rev_dict)
         storage.save()
         return jsonify({}), 200
+
 
 @app_views.route('places/<place_id>/reviews', methods=['POST'],
                  strict_slashes=False)
@@ -79,7 +80,7 @@ def updateReview(review_id):
     if res is None:
         abort(400, "Not a JSON")
     else:
-        for key in res.item():
+        for key in res:
             if key not in ['id',
                            'created_at',
                            'updated_at',
