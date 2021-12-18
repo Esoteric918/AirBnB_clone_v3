@@ -23,7 +23,7 @@ def all_users():
         if 'email' not in user_dict.keys():
             abort(400, "Missing email")
         if 'password' not in user_dict.keys():
-            abort(400, "Missing email")
+            abort(400, "Missing password")
         user = User(**user_dict)
         storage.new(user)
         storage.save()
