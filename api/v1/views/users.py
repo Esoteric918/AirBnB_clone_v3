@@ -49,7 +49,7 @@ def single_user(user_id):
         if not update_dict:
             abort(400, "Not a JSON")
         for key in update_dict:
-            if key not in ['created_at', 'id', 'updated_at']:
+            if key not in ['created_at', 'id', 'updated_at', 'email']:
                 setattr(user, key, update_dict[key])
         user.save()
         return jsonify(user.to_dict()), 200
