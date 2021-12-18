@@ -40,7 +40,7 @@ def change_amenities(place_id, amenity_id):
     elif request.method == 'POST':
         if amenity not in place.amenities:
             if getenv("HBNB_TYPE_STORAGE") == 'db':
-                place.amenities.append(amenity.id)
+                place.amenities.append(amenity)
             else:
                 place.amenity_ids.append(amenity.id)
             place.save()

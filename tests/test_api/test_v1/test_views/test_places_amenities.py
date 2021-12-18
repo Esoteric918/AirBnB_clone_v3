@@ -48,7 +48,7 @@ class TestAPIAemnities(unittest.TestCase):
         amenity = Amenity(name="Test")
         amenity.save()
         if getenv("HBNB_TYPE_STORAGE") == 'db':
-            self.pl.amenities.append(amenity.id)
+            self.pl.amenities.append(amenity)
         else:
             self.pl.amenity_ids.append(amenity.id)
         self.pl.save()
