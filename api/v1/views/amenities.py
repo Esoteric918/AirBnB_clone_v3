@@ -14,7 +14,7 @@ def all_amenities():
         for amenity in storage.all(Amenity).values():
             res.append(amenity.to_dict())
         return jsonify(res)
-    elif request.method =='POST':
+    elif request.method == 'POST':
         amenity_dict = request.get_json()
         if not amenity_dict:
             abort(400, "Not a JSON")
