@@ -9,6 +9,7 @@ from flask import jsonify, request, abort
 @app_views.route('/users', methods=['GET', 'POST'],
                  strict_slashes=False)
 def all_users():
+    """handles /users routes"""
     if request.method == 'GET':
         res = []
         for user in storage.all(User).values():
@@ -33,6 +34,7 @@ def all_users():
 @app_views.route('/users/<user_id>', methods=['GET', 'DELETE', 'PUT'],
                  strict_slashes=False)
 def single_user(user_id):
+    """handles routes for specific user obj"""
     user = storage.get(User, user_id)
     if not user:
         abort(404)
