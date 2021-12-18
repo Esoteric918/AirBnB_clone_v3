@@ -58,7 +58,7 @@ def create_city(state_id):
 def update_city(city_id):
     city = storage.get(City, city_id)
     if not city:
-         abort(404)
+        abort(404)
     city_dict = request.get_json()
     if not city_dict:
         abort(400, "Not a JSON")
