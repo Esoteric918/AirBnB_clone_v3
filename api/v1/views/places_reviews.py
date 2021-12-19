@@ -82,11 +82,11 @@ def updateReview(review_id):
     else:
         for key in res:
             if key not in ['id',
-                           'created_at',
-                           'updated_at',
                            'user_id',
                            'place_id']:
-                setattr(obj, key, res[key])
+                           'created_at',
+                           'updated_at',
+            setattr(obj, key, res[key])
         obj.save()
         newOb = obj.to_dict()
         return jsonify(newOb), 200
