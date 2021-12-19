@@ -47,6 +47,7 @@ def deleteReview(review_id):
 @app_views.route('places/<place_id>/reviews', methods=['POST'],
                  strict_slashes=False)
 def makeReview(place_id):
+    """make a review for place"""
     place = storage.get(Place, place_id)
     rev_dict = request.get_json()
     if not place:
@@ -83,10 +84,10 @@ def updateReview(review_id):
         for key in res:
             if key not in ['id',
                            'user_id',
-                           'place_id']:
+                           'place_id',
                            'created_at',
-                           'updated_at',
-            setattr(obj, key, res[key])
+                           'updated_at']:
+                setattr(obj, key, res[key])
         obj.save()
         newOb = obj.to_dict()
         return jsonify(newOb), 200
