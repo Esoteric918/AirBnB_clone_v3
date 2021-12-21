@@ -54,13 +54,13 @@ def makeReview(place_id):
     rev_dict = request.get_json()
     if not rev_dict:
         abort(400, "Not a JSON")
-    if "text" not in rev_dict.keys():
-        abort(400, "Missing text")
     user_id = rev_dict.get("user_id")
     if user_id is None:
         abort(400, "Missing user_id")
     elif storage.get('User', user_id) is None:
         abort(404)
+    elif "text" not in rev_dict.keys():
+        abort(400, "Missing text")
     else:
         review = Review(**rev_dict)
         review.place_id = place.id
