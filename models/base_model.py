@@ -11,7 +11,6 @@ from sqlalchemy import Column, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 import uuid
 
-from models.user import password
 
 time = "%Y-%m-%dT%H:%M:%S.%f"
 
