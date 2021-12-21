@@ -49,10 +49,10 @@ def deleteReview(review_id):
 def makeReview(place_id):
     """make a review for place"""
     place = storage.get(Place, place_id)
-    rev_dict = request.get_json()
     if not place:
         abort(404)
-    elif not rev_dict:
+    rev_dict = request.get_json()
+    if not rev_dict:
         abort(400, "Not a JSON")
     if "text" not in rev_dict.keys():
         abort(400, "Missing text")
