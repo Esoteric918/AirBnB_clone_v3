@@ -86,6 +86,6 @@ def updateReview(review_id):
                            'created_at',
                            'updated_at']:
                 setattr(obj, key, res[key])
-        storage.save()
+        obj.save()
         newOb = obj.to_dict()
         return jsonify(newOb), 200
