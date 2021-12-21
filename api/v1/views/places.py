@@ -72,6 +72,5 @@ def places_with_id(place_id):
                            'created_at',
                            'updated_at']:
                 setattr(place_obj, key, req_json[key])
-        storage.new(place_obj)
-        storage.save()
+        place_obj.save()
         return jsonify(place_obj.to_dict()), 200
