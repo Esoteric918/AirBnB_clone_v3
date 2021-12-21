@@ -37,7 +37,8 @@ def places_per_city(city_id):
             abort(400, 'Missing name')
         req_json['city_id'] = city_id
         new_object = Place(**req_json)
-        new_object.save()
+        storage.new(new_object)
+        storage.save()
         return jsonify(new_object.to_dict()), 201
 
 
@@ -69,5 +70,6 @@ def places_with_id(place_id):
                            'created_at',
                            'updated_at']:
                 setattr(place_obj, key, req_json[key])
-        place_obj.save()
+        storage.new(place_obj)
+        storage.save()
         return jsonify(place_obj.to_dict()), 200
