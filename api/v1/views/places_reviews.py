@@ -7,7 +7,7 @@ from flask import jsonify, request, abort
 from models.place import Place
 
 
-@app_views.route('places/<place_id>/reviews',
+@app_views.route('/places/<place_id>/reviews',
                  methods=['GET'], strict_slashes=False)
 def placeReview(place_id):
     """ gets all the places"""
@@ -21,7 +21,7 @@ def placeReview(place_id):
     return jsonify(res)
 
 
-@app_views.route('reviews/<review_id>',
+@app_views.route('/reviews/<review_id>',
                  methods=['GET'], strict_slashes=False)
 def getReview(review_id):
     revP = storage.get(Review, review_id)
@@ -31,7 +31,7 @@ def getReview(review_id):
         return jsonify(revP.to_dict())
 
 
-@app_views.route('reviews/<review_id>', methods=['DELETE'],
+@app_views.route('/reviews/<review_id>', methods=['DELETE'],
                  strict_slashes=False)
 def deleteReview(review_id):
     """Deletes a place"""
@@ -44,7 +44,7 @@ def deleteReview(review_id):
         return jsonify({}), 200
 
 
-@app_views.route('places/<place_id>/reviews', methods=['POST'],
+@app_views.route('/places/<place_id>/reviews', methods=['POST'],
                  strict_slashes=False)
 def makeReview(place_id):
     """make a review for place"""
@@ -69,7 +69,7 @@ def makeReview(place_id):
         return jsonify(place.to_dict()), 201
 
 
-@app_views.route('reviews/<review_id>', methods=['PUT'], strict_slashes=False)
+@app_views.route('/reviews/<review_id>', methods=['PUT'], strict_slashes=False)
 def updateReview(review_id):
     """update a place"""
     obj = storage.get(Review, review_id)
