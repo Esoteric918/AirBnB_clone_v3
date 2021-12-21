@@ -19,8 +19,6 @@ def all_users():
         user_dict = request.get_json()
         if not user_dict:
             abort(400, "Not a JSON")
-        if 'name' not in user_dict.keys():
-            abort(400, "Missing name")
         if 'email' not in user_dict.keys():
             abort(400, "Missing email")
         if 'password' not in user_dict.keys():
