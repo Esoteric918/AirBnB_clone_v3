@@ -10,7 +10,6 @@ from models.place import Place
 
 @app_views.route('/cities/<city_id>/places', methods=['GET', 'POST'],
                  strict_slashes=False)
-
 def places_per_city(city_id):
     """
         places route to handle http method for requested places by city
