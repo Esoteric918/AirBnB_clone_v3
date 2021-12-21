@@ -9,7 +9,8 @@ from models.place import Place
 
 
 @app_views.route('/cities/<city_id>/places', methods=['GET', 'POST'],
-                 strick_slashes=False)
+                 strict_slashes=False)
+
 def places_per_city(city_id):
     """
         places route to handle http method for requested places by city
@@ -44,7 +45,7 @@ def places_per_city(city_id):
 
 
 @app_views.route('/places/<place_id>', methods=['GET', 'DELETE', 'PUT'],
-                 strick_slashes=False)
+                 strict_slashes=False)
 def places_with_id(place_id):
     """
         places route to handle http methods for given place
