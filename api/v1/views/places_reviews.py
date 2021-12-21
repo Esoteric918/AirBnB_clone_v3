@@ -54,8 +54,6 @@ def makeReview(place_id):
         abort(404)
     elif not rev_dict:
         abort(400, "Not a JSON")
-    elif "name" not in rev_dict.keys():
-        abort(400, "Missing name")
     if "text" not in rev_dict.keys():
         abort(400, "Missing text")
     user_id = rev_dict.get("user_id")
