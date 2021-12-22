@@ -110,10 +110,10 @@ def places_search():
         result = []
         for place in places:
             for amenity in place.amenities:
-                a = True
+                has_amenity = True
                 if amenity.id not in am_ids:
-                    a = False
+                    has_amenity = False
                     break
-            if a is True:
+            if has_amenity is True:
                 result.append(place.to_dict())
     return jsonify(result)
