@@ -81,7 +81,7 @@ def places_with_id(place_id):
 def places_search():
     """search filters for places"""
     filter_dict = request.get_json()
-    if not filter_dict:
+    if filter_dict is None:
         abort(400, "Not a JSON")
     city_ids = filter_dict.get('cities')
     cities = []
