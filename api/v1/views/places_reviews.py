@@ -66,7 +66,7 @@ def makeReview(place_id):
         review.place_id = place.id
         storage.new(review)
         storage.save()
-        return jsonify(place.to_dict()), 201
+        return jsonify(review.to_dict()), 201
 
 
 @app_views.route('/reviews/<review_id>', methods=['PUT'], strict_slashes=False)

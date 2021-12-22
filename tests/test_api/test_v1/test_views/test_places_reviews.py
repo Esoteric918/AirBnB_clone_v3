@@ -43,6 +43,10 @@ class TestAPIAemnities(unittest.TestCase):
             content_type="application/json",
             data=json.dumps(review_args),
             follow_redirects=True)
+        r = response.json
+        self.assertEqual(r.get('__class__'), 'Review')
+        self.assertEqual(r.get('user_id'), self.user.id)
+        self.assertEqual(r.get('place_id'), self.pl.id)
         self.assertEqual(response.status_code, 201)
         end = storage.count('Review')
         self.assertEqual(start + 1, end)
