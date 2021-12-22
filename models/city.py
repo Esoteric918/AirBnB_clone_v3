@@ -18,6 +18,7 @@ class City(BaseModel, Base):
     else:
         state_id = ""
         name = ""
+
         @property
         def places(self):
             """places getter"""
