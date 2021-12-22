@@ -97,18 +97,19 @@ def places_search():
             if city and city not in cities:
                 cities.append(city)
     if len(cities) == 0:
-        places = [place for place in storage.all('Place').values()]
+        pl_list = [place for place in storage.all('Place').values()]
     else:
-        places = []
+        pl_list = []
         for city in cities:
             for place in city.places:
-                places.append(place)
+                pl_list.append(place)
     am_ids = filter_dict.get('amenities')
     if not am_ids or len(am_ids) == 0:
-        result = [place.to_dict() for place in places]
+        result = [place.to_dict() for place in pl_list]
     else:
         result = []
-        for place in places:
+        for place in pl_list:
+            pl = place.to_dict()
             for a_id in am_ids:
                 has_amenity = True
                 a = storage.get('Amenity', a_id)
@@ -116,5 +117,5 @@ def places_search():
                     has_amenity = False
                     break
             if has_amenity is True:
-                result.append(place.to_dict())
+                result.append(pl)
     return jsonify(result)
