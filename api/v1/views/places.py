@@ -109,9 +109,10 @@ def places_search():
     else:
         result = []
         for place in places:
-            for amenity in place.amenities:
+            for a_id in am_ids:
                 has_amenity = True
-                if amenity.id not in am_ids:
+                a = storage.get('Amenity', a_id)
+                if a not in place.amenities:
                     has_amenity = False
                     break
             if has_amenity is True:
