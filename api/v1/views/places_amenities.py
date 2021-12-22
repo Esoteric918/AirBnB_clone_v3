@@ -35,7 +35,7 @@ def change_amenities(place_id, amenity_id):
             place.amenities.remove(amenity)
         else:
             place.amenity_ids.remove(amenity.id)
-        place.save
+        place.save()
         return jsonify({}), 200
     elif request.method == 'POST':
         if amenity not in place.amenities:

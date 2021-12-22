@@ -57,6 +57,12 @@ class TestAPIAemnities(unittest.TestCase):
             '/api/v1/places/{}/amenities/{}'.format(self.pl.id, amenity.id))
         self.assertEqual(response.status_code, 200)
         self.assertFalse(amenity in self.pl.amenities)
+        p = storage.get(Place, self.pl.id)
+        c = False
+        for a in p.amenities:
+            if a.id == amenity.id:
+                c = True
+        self.assertFalse(c)
         res = self.app.get(
             '/api/v1/places/{}/amenities'.format(self.pl.id))
         b = False
