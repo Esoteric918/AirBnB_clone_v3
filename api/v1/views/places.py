@@ -98,7 +98,7 @@ def places_search():
             if city:
                 cities.append(city)
     if len(cities) == 0:
-        places = storage.all('Place').values()
+        places = [place for place in storage.all('Place').values()]
     else:
         places = []
         for city in cities:
