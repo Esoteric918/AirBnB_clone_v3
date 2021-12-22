@@ -90,12 +90,11 @@ def places_search():
             st = storage.get('State', state_id)
             if st:
                 for city in st.cities:
-                    if city.id not in city_ids:
                         cities.append(city)
     if city_ids:
         for city_id in city_ids:
             city = storage.get('City', city_id)
-            if city:
+            if city and city not in cities:
                 cities.append(city)
     if len(cities) == 0:
         places = [place for place in storage.all('Place').values()]
@@ -104,7 +103,7 @@ def places_search():
         for city in cities:
             places.append(place for place in city.places)
     am_ids = filter_dict.get('amenities')
-    if not am_ids:
+    if not am_ids or len(am_ids) == 0:
         result = [place.to_dict() for place in places]
     else:
         result = []
