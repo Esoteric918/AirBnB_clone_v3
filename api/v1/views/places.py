@@ -101,7 +101,8 @@ def places_search():
     else:
         places = []
         for city in cities:
-            places.append(place for place in city.places)
+            for place in city.places:
+                places.append(place)
     am_ids = filter_dict.get('amenities')
     if not am_ids or len(am_ids) == 0:
         result = [place.to_dict() for place in places]
