@@ -92,10 +92,11 @@ def places_search():
                 for city in st.cities:
                     if city.id not in city_ids:
                         cities.append(city)
-    for city_id in city_ids:
-        city = storage.get('City', city_id)
-        if city:
-            cities.append(city)
+    if city_ids:
+        for city_id in city_ids:
+            city = storage.get('City', city_id)
+            if city:
+                cities.append(city)
     if len(cities) == 0:
         places = storage.all('Place').values()
     else:
