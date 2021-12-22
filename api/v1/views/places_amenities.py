@@ -44,4 +44,6 @@ def change_amenities(place_id, amenity_id):
             else:
                 place.amenity_ids.append(amenity.id)
             place.save()
-        return jsonify(amenity.to_dict()), 201
+            return jsonify(amenity.to_dict()), 201
+        else:
+            return jsonify(amenity.to_dict()), 200

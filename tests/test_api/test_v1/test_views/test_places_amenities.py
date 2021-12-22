@@ -52,7 +52,16 @@ class TestAPIAemnities(unittest.TestCase):
         else:
             self.pl.amenity_ids.append(amenity.id)
         self.pl.save()
+        self.assertTrue(amenity in self.pl.amenities)
         response = self.app.delete(
             '/api/v1/places/{}/amenities/{}'.format(self.pl.id, amenity.id))
         self.assertEqual(response.status_code, 200)
         self.assertFalse(amenity in self.pl.amenities)
+        res = self.app.get(
+            '/api/v1/places/{}/amenities'.format(self.pl.id))
+        b = False
+        r = res.json
+        for a in r:
+            if a.get('id') == amenity.id:
+                b = True
+        self.assertFalse(b)
