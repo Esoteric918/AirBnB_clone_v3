@@ -18,6 +18,12 @@ class City(BaseModel, Base):
     else:
         state_id = ""
         name = ""
+        @property
+        def places(self):
+            """places getter"""
+            from models import storage
+            return [place for place in storage.all('Place')
+                    if place.city_id == self.id]
 
     def __init__(self, *args, **kwargs):
         """initializes city"""
