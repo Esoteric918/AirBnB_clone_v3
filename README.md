@@ -65,7 +65,13 @@ Classes inherited from Base Model:
 [app.py](api/v1/app.py) - starts Flask 
 * `def teardown(context)` - reloads storage after each request
 * `def page_not_found(error)` - 404 response  
-  
+
+#### `api/v1/views` - sets up routes for Flask app with classes objects in Base Model
+[states.py](/api/v1/views/states.py) - set up for states routes
+* `@app_views.route('/states', methods=['GET', 'POST'], strict_slashes=False)`
+* `def getStates()` - GET and POST for state 
+* `@app_views.route('/states/<state_id>', methods=['GET', 'DELETE', 'PUT'], strict_slashes=False)`
+* `def state_by_id(state_id)` - GET, DELETE, PUT for state
   
 #### `/tests` directory contains all unit test cases for this project:
 [/test_models/test_base_model.py](/tests/test_models/test_base_model.py) - Contains the TestBaseModel and TestBaseModelDocs classes
